@@ -91,23 +91,3 @@ class Bucket {
 }
 
 TokenBucket = new Bucket()
-
-
-var TokenBucket = function(){
-  var tokens = ['12345'],
-    bucket = [],
-    interval = 1000
-
-  setInterval(function(){
-    tokens.map(function(token){
-      bucket.push(token)
-    })
-  }, interval)
-
-
-  this.getToken = function(){
-    return bucket.shift()
-  }
-}
-
-module.exports = new TokenBucket()
