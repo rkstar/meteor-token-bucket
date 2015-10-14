@@ -1,8 +1,11 @@
-let instance = null
-class Bucket {
-  constructor(){
-    instance = instance || this
-    return instance
+TokenBucket = class {
+  constructor(tokens){
+    tokens = (tokens && _.isArray(tokens)) ? tokens : [tokens]
+    tokens.map((token)=>{
+      if( token ){
+        this.addToken(token)
+      }
+    })
   }
 
   addToken(token){
@@ -89,5 +92,3 @@ class Bucket {
     this._intervals = value
   }
 }
-
-TokenBucket = new Bucket()

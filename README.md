@@ -13,21 +13,31 @@ Easily create and manage a bucket of tokens
 
 ## Methods
 
+### constructor
+Add a token or array of tokens to your bucket when you instantiate it
+```javascript
+let bucket = new TokenBucket('single-token')
+// or
+let bucket = new TokenBucket(['token-one','token-two','token-three'])
+```
+The constructor will accept a single token or an array of tokens.  You can also instantiate
+the `TokenBucket` class without a token if you do not have/need one right away.
+
 ### addToken(token)
 Adds a `token` to your bucket
 ```javascript
-TokenBucket.addToken('single-token')
+bucket.addToken('single-token')
 ```
 ### getToken()
 Retrieves a token from your bucket
 ```javascript
-let token = TokenBucket.getToken()
+let token = bucket.getToken()
 If no tokens are available, `token` will be `null`
 
 ### addTokenAtInterval(token, [interval], [intervalValue])
 Adds `token` to your bucket at a regular `interval`
 ```javascript
-TokenBucket.addTokenAtInterval('auto-token', 5, 'seconds')
+bucket.addTokenAtInterval('auto-token', 5, 'seconds')
 ```
 * token => your token to add to the bucket
 * interval => **default 1** (number) the frequency to add this token to the bucket
