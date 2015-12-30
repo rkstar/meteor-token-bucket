@@ -53,3 +53,8 @@ Stops the automatic adding of `token` that was started by using `addTokenAtInter
 ```javascript
 TokenBucket.stopAddingToken('auto-token')
 ```
+
+## Properties
+
+### limit
+Set a limit for the number of tokens in your bucket at any one time.  No tokens will be added above the limit.
