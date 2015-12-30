@@ -6,7 +6,9 @@ class Bucket {
   }
 
   addToken(token){
-    this.bucket.push(token)
+    if( !this.limit || (this.bucket.length < this.limit) ){
+      this.bucket.push(token)
+    }
   }
 
   getToken(){
@@ -87,6 +89,16 @@ class Bucket {
       value = {value}
     }
     this._intervals = value
+  }
+
+  get limit(){
+    if( !this._limit ){
+      this.limit = 0
+    }
+    return this._limit
+  }
+  set limit(int){
+    this._limit = !_.isInteger(int) ? 0 : int
   }
 }
 
