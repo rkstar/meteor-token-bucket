@@ -16,7 +16,7 @@ class Bucket {
   }
 
   addTokenAtInterval(token, interval=1000, intervalValue='ms'){
-    if( !_.isNumber(interval) ){
+    if( !_.isInteger(interval) ){
       return
     }
 
