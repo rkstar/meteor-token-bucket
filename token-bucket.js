@@ -1,11 +1,8 @@
-TokenBucket = class {
-  constructor(tokens){
-    tokens = (tokens && _.isArray(tokens)) ? tokens : [tokens]
-    tokens.map((token)=>{
-      if( token ){
-        this.addToken(token)
-      }
-    })
+let instance = null
+class __TokenBucketClass__ {
+  constructor(){
+    instance = instance || this
+    return instance
   }
 
   addToken(token){
@@ -105,4 +102,4 @@ TokenBucket = class {
   }
 }
 
-TokenBucket = new Bucket()
+TokenBucket = new __TokenBucketClass__()

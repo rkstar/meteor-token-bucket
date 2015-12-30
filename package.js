@@ -1,6 +1,6 @@
 Package.describe({
   name: 'rkstar:token-bucket',
-  version: '1.1.3',
+  version: '1.1.4',
   // Brief, one-line summary of the package.
   summary: 'Easily create and manage a bucket of tokens',
   // URL to the Git repository containing the source code for this package.
