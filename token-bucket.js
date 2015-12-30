@@ -1,5 +1,5 @@
 let instance = null
-class Bucket {
+class __TokenBucketClass__ {
   constructor(){
     instance = instance || this
     return instance
@@ -102,4 +102,4 @@ class Bucket {
   }
 }
 
-TokenBucket = new Bucket()
+TokenBucket = new __TokenBucketClass__()
