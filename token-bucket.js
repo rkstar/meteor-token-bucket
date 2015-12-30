@@ -6,13 +6,19 @@ TokenBucket = class {
   }
 
   addToken(token){
-    if( !this.limit || (this.bucket.length < this.limit) ){
-      this.bucket.push(token)
-    }
+    this.underLimit()
+      ? this.bucket.push(token)
+      : this.stopAddingToken(token, true)
   }
 
   getToken(){
-    return this.bucket.shift()
+    let token = this.bucket.shift(),
+      ref = this.intervalReferences[token]
+    if( ref && ref.paused && this.underLimit() ){
+      this.intervalReferences[token].paused = false
+      this.addTokenAtInterval(ref.token, ref.interval, ref.intervalValue)
+    }
+    return token
   }
 
   addTokenAtInterval(token, interval=1000, intervalValue='ms'){
@@ -53,16 +59,33 @@ TokenBucket = class {
         break
     }
 
+    this.addTokenIntervalReference(token, interval, intervalValue)
     this.intervals[token] = setInterval(()=>{
       this.addToken(token)
     }, iv)
   }
 
-  stopAddingToken(token){
+  addTokenIntervalReference(token, interval=1000, intervalValue='ms'){
+    this.intervalReferences[token] = {token, interval, intervalValue}
+  }
+
+  stopAddingToken(token, pause=false){
     if( this.intervals[token] ){
       clearInterval(this.intervals[token])
       delete this.intervals[token]
+      if( pause ){
+        this.intervalReferences[token].paused = true
+      } else {
+        delete this.intervalReferences[token]
+      }
     }
+  }
+
+  underLimit(){
+    if( !this.limit ){
+      return true
+    }
+    return (this.bucket.length < this.limit)
   }
 
   get bucket(){
@@ -89,6 +112,19 @@ TokenBucket = class {
       value = {value}
     }
     this._intervals = value
+  }
+
+  get intervalReferences(){
+    if( !this._intervalReferences ){
+      this.intervalReferences = {}
+    }
+    return this._intervalReferences
+  }
+  set intervalReferences(value){
+    if( !_.isObject(value) ){
+      value = {value}
+    }
+    this._intervalReferences = value
   }
 
   get limit(){
