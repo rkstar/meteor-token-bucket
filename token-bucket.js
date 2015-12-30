@@ -1,5 +1,5 @@
 let instance = null
-class __TokenBucketClass__ {
+TokenBucket = class {
   constructor(){
     instance = instance || this
     return instance
@@ -16,7 +16,7 @@ class __TokenBucketClass__ {
   }
 
   addTokenAtInterval(token, interval=1000, intervalValue='ms'){
-    if( !_.isInteger(interval) ){
+    if( !_.isNumber(interval) ){
       return
     }
 
@@ -98,8 +98,6 @@ class __TokenBucketClass__ {
     return this._limit
   }
   set limit(int){
-    this._limit = !_.isInteger(int) ? 0 : int
+    this._limit = !_.isNumber(int) ? 0 : int
   }
 }
-
-TokenBucket = new __TokenBucketClass__()
