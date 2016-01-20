@@ -42,7 +42,7 @@ bucket.addTokenAtInterval('auto-token', 5, 'seconds')
 * token => your token to add to the bucket
 * interval => **default 1** (number) the frequency to add this token to the bucket
 * intervalValue => **default ms** (string) value of the frequency number. options are:
-`ms / millisonds` => milliseconds
+`ms / milliseconds` => milliseconds
 `s / seconds` => seconds
 `m / minutes` => minutes
 `h / hours` => hours
